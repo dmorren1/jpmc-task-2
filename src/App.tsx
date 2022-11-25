@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DataStreamer, { ServerRespond } from './DataStreamer';
 import Graph from './Graph';
 import './App.css';
+import {setinterval} from "timers";
 
 /**
  * State declaration for <App />
@@ -32,7 +33,7 @@ class App extends Component<{}, IState> {
    */
   renderGraph() {
     if (this.state.showGraph) {
-    return (<Graph data={this.state.data}/>)
+        return (<Graph data={this.state.data}/>)
   }
 }
 
@@ -71,7 +72,9 @@ class App extends Component<{}, IState> {
             // As part of your task, update the getDataFromServer() function
             // to keep requesting the data every 100ms until the app is closed
             // or the server does not return anymore data.
-            onClick={() => {this.getDataFromServer()}}>
+            onClick={() => {
+              this.getDataFromServer()
+              }}>
             Start Streaming Data
           </button>
           <div className="Graph">

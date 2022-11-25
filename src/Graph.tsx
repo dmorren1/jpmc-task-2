@@ -30,6 +30,7 @@ class Graph extends Component<IProps, {}> {
     return React.createElement('perspective-viewer');
   }
 
+
   componentDidMount() {
     // Get element to attach the table from the DOM.
     const elem = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement;
@@ -39,7 +40,7 @@ class Graph extends Component<IProps, {}> {
       top_ask_price: 'float',
       top_bid_price: 'float',
       timestamp: 'date',
-    };
+   };
 
     if (window.perspective && window.perspective.worker()) {
       this.table = window.perspective.worker().table(schema);
@@ -54,14 +55,12 @@ class Graph extends Component<IProps, {}> {
       elem.setAttribute('row-pivots', '["timestamp"]');
       elem.setAttribute('columns', '["top_ask_price"]');
       elem.setAttribute('aggregates', ` 
-        {"stock":"distinct count",
-        "top_ask_price":"avg",
-        "top_bid_price":"avg",
-        "timestamp":"distinct count"}`);
+        '{"stock":"distinct count","top_ask_price":"avg","top_bid_price":"avg","timestamp":"distinct count"}`
+        );
     }
   }
-
-  componentDidUpdate() {
+  
+componentDidUpdate() { 
     // Everytime the data props is updated, insert the data into Perspective table
     if (this.table) {
       // As part of the task, you need to fix the way we update the data props to
@@ -77,6 +76,6 @@ class Graph extends Component<IProps, {}> {
       }));
     }
   }
-}
+
 
 export default Graph;
